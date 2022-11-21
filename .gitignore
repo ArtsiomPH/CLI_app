@@ -2,6 +2,4 @@
 .__pycache__
 .coverage
 .idea
-tests/.__pycache__
-tests/.DS_Store
 .DS_Store
