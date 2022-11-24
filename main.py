@@ -19,7 +19,7 @@ def get_result_dict(responses: list):
 
     for dct in responses:
         result_dict = {**dct, **result_dict} if dct is not None else result_dict
-    return result_dict if result_dict else 'There were no urls among the strings'
+    return result_dict if result_dict else "There were no urls among the strings"
 
 
 async def get_status_codes(string: str):
@@ -27,36 +27,36 @@ async def get_status_codes(string: str):
         print(f"'{string}' is not url")
         return None
 
-    status_codes_dict = {f'{string}': {}}
+    status_codes_dict = {f"{string}": {}}
     async with ClientSession() as session:
         async with session.get(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.post(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.put(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.patch(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.delete(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.head(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
         async with session.options(string) as resp:
             if resp.status != 405:
-                status_codes_dict[f'{string}'].update({resp.method: resp.status})
+                status_codes_dict[f"{string}"].update({resp.method: resp.status})
     return status_codes_dict
 
 
 async def main():
     strings = sys.argv[1:]
     if not strings:
-        sys.stderr.write('Please enter urls.')
+        sys.stderr.write("Please enter urls.")
         sys.exit()
 
     tasks = []
@@ -70,5 +70,5 @@ async def main():
     pprint(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())

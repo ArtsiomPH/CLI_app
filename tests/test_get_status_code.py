@@ -25,15 +25,15 @@ class MockContextManager:
 
 @pytest.mark.asyncio
 async def test_send_not_url_string():
-    res = await get_status_codes('some string')
+    res = await get_status_codes("some string")
     assert res is None
 
 
 # @pytest.mark.skip
 @pytest.mark.asyncio
 async def test_send_url():
-    res = await get_status_codes('https://www.google.com/')
-    assert res == {'https://www.google.com/': {'GET': 200, 'HEAD': 200}}
+    res = await get_status_codes("https://www.google.com/")
+    assert res == {"https://www.google.com/": {"GET": 200, "HEAD": 200}}
 
 
 @pytest.mark.asyncio
@@ -67,5 +67,5 @@ async def test_send_url_mock(monkeypatch):
     monkeypatch.setattr(ClientSession, "head", mock_head)
     monkeypatch.setattr(ClientSession, "options", mock_options)
 
-    res = await get_status_codes('https://www.google.com/')
-    assert res == {'https://www.google.com/': {'GET': 200, 'HEAD': 200}}
+    res = await get_status_codes("https://www.google.com/")
+    assert res == {"https://www.google.com/": {"GET": 200, "HEAD": 200}}
